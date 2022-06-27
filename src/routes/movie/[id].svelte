@@ -1,7 +1,11 @@
-<script context="module">
-	export async function load({ fetch, params }) {
+<script context="module" lang="ts">
+	import type { Load } from '@sveltejs/kit';
+
+	export const load: Load = async ({ fetch, params }) => {
 		const res = await fetch(
-			`https://api.themoviedb.org/3/movie/${params.id}?api_key=361122f735a0c3d01c0ff9b69a94ff26&language=en-US`
+			`https://api.themoviedb.org/3/movie/${params.id}?api_key=${
+				import.meta.env.VITE_TMDB_API_KEY
+			}&language=en-US`
 		);
 		const data = await res.json();
 		if (res.ok) {
@@ -12,19 +16,27 @@
 			};
 		}
 		return {};
-	}
+	};
 </script>
 
-<script>
-	export let movie;
+<script lang="ts">
+	import type { Movie } from 'src/apis/movie';
+	export let movie: Movie;
 </script>
 
 {#if movie}
 	<div>
 		<img src={'https://image.tmdb.org/t/p/original/' + movie.backdrop_path} alt={movie.title} />
-		<p>{movie.id}</p>
-		<p>{movie.title}</p>
+		<div>{movie.title}</div>
+		<p>{movie.overview}</p>
+		<div>{movie.vote_average}</div>
 	</div>
 {:else}
 	<div>loading data</div>
 {/if}
+
+<style>
+	img {
+		width: 100%;
+	}
+</style>

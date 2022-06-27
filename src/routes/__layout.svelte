@@ -1,9 +1,12 @@
+<script>
+	import Nav from '../components/Nav.svelte';
+
+	import global from '../global.css';
+</script>
+
 <svelte:head>
 	<title>Movie DB Svelte</title>
 </svelte:head>
 
-<nav>
-	<a href="/">Home</a>
-</nav>
-
+<Nav />
 <slot />

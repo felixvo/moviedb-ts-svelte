@@ -1,9 +1,14 @@
 <script context="module" lang="ts">
-	export async function load({ fetch, params }) {
+	import type { Load } from '@sveltejs/kit';
+	import type { ListMovieResposne } from 'src/apis/movie';
+
+	export const load: Load = async ({ fetch, params }) => {
 		const res = await fetch(
-			`https://api.themoviedb.org/3/search/movie?api_key=361122f735a0c3d01c0ff9b69a94ff26&query=${params.query}&language=en-US&page=1`
+			`https://api.themoviedb.org/3/search/movie?api_key=${
+				import.meta.env.VITE_TMDB_API_KEY
+			}&query=${params.query}&language=en-US&page=1`
 		);
-		const data = await res.json();
+		const data: ListMovieResposne = await res.json();
 		if (res.ok) {
 			return {
 				props: {
@@ -11,16 +16,16 @@
 				}
 			};
 		}
-	}
+	};
 </script>
 
 <script lang="ts">
 	type Movie = {
-		id: String
-		title: String
-	}
+		id: String;
+		title: String;
+	};
 	import PopularMovies from '../../components/PopularMovies.svelte';
-	export let popularMovies: Movie[]
+	export let popularMovies: Movie[];
 </script>
 
 <section>
