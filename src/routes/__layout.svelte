@@ -1,7 +1,7 @@
 <script>
 	import Nav from '../components/Nav.svelte';
 
-	import global from '../global.css';
+	import '../app.css';
 </script>
 
 <svelte:head>
@@ -9,4 +9,6 @@
 </svelte:head>
 
 <Nav />
-<slot />
+<div class="container mx-auto">
+    <slot />
+</div>
