@@ -26,7 +26,11 @@
 
 {#if movie}
 	<div>
-		<img src={'https://image.tmdb.org/t/p/original/' + movie.backdrop_path} alt={movie.title} />
+		<img
+			class="w-full"
+			src={'https://image.tmdb.org/t/p/original/' + movie.backdrop_path}
+			alt={movie.title}
+		/>
 		<div>{movie.title}</div>
 		<p>{movie.overview}</p>
 		<div>{movie.vote_average}</div>
@@ -34,9 +38,3 @@
 {:else}
 	<div>loading data</div>
 {/if}
-
-<style>
-	img {
-		width: 100%;
-	}
-</style>

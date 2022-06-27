@@ -11,7 +11,6 @@
 
 		const data: ListMovieResposne = await res.json();
 		if (res.ok) {
-			console.log(data);
 			return {
 				props: {
 					popularMovies: data.results
